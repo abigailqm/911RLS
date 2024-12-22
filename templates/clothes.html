@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta
+    name="viewport"
+    content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"
+  >
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href="../static/css/style.css">
+  <title>Body Types</title>
+</head>
+<body>
+  <header class="header">
+    <div class="header__text">
+      <h1>911RLS</h1>
+      <p>Asisten super untuk semua masalah cewek di dunia!</p>
+    </div>
+  </header>
+  <main>
+    {% block content %}
+    <h2 class="main__title">How to dress for your body type!
+    </h2>
+    <ul class="list" id="list">
+      <li class="list__item">
+        <a href={{"/Applebody"}}>
+        <iframe width="914" height="514" src="https://www.youtube.com/embed/7wGCGbW5o_w" title="How To Dress APPLE shaped body | 11 Outfits" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+        <span>Apple Body</span></a>
+      </li>
+      <li class="list__item">
+        <a href={{"/HourglassBody"}}>
+        <iframe width="914" height="514" src="https://www.youtube.com/embed/WJ6Z5Ah-XYc" title="5 Best and Worst Style for Hourglass Body Type" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+        <span>Hourglass Body</span></a>
+      </li>
+      <li class="list__item">
+        <a href={{"/PearBody"}}>
+        <iframe width="914" height="514" src="https://www.youtube.com/embed/FEKa-iUUYeo" title="How to dress PEAR shaped body BETTER | Fixing 10 Outfits" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+        <span>Pear Body</span></a>
+      </li>
+      <li class="list__item">
+        <a href={{"/RectangleBody"}}>
+        <iframe width="913" height="514" src="https://www.youtube.com/embed/YHwyNiouyuA" title="How to Style a Rectangle Body Type + ways to look curvier in your outfits 🤍" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+        <span>Rectangle Body</span></a>
+      </li>
+      <li class="list__item">
+        <a href={{"/InvertedTriangleBody"}}>
+        <iframe width="914" height="514" src="https://www.youtube.com/embed/6rw0BpqBtVA" title="How to Style an Inverted Triangle Body Type (tips + tricks)" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+        <span>Inverted Triangle Body</span></a>
+      </li>
+    </ul>
+    {% endblock %}
+  </main>
+  <footer>
+  </footer>
+</body>
+</html>

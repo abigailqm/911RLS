@@ -1,0 +1,162 @@
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kalkulator Bentuk Tubuh</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #fbe7ef;
+            color: #333;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            text-align: center;
+            color: #edafbb;
+        }
+
+        label {
+            font-weight: bold;
+            margin-top: 10px;
+            display: block;
+        }
+
+        input {
+            width: 100%;
+            padding: 10px;
+            margin: 5px 0 15px;
+            border-radius: 5px;
+            border: 1px solid #ddd;
+        }
+
+        button {
+            width: 100%;
+            padding: 12px;
+            background-color: #c68792;
+            color: white;
+            border: none;
+            font-size: 16px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #ff85b3;
+        }
+
+        .result {
+            margin-top: 20px;
+            background-color: #f4f4f4;
+            padding: 15px;
+            border-radius: 5px;
+            border: 1px solid #ddd;
+        }
+
+        .result p {
+            margin: 10px 0;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+        <h1>Kalkulator Bentuk Tubuh</h1>
+
+        <label for="lingkarPinggang">Lingkar Pinggang (cm):</label>
+        <input type="number" id="lingkarPinggang" placeholder="Masukkan lingkar pinggang" required>
+
+        <label for="lingkarDada">Lingkar Dada (cm):</label>
+        <input type="number" id="lingkarDada" placeholder="Masukkan lingkar dada" required>
+
+        <label for="lingkarPinggul">Lingkar Pinggul (cm):</label>
+        <input type="number" id="lingkarPinggul" placeholder="Masukkan lingkar pinggul" required>
+
+        <label for="tinggiBadan">Tinggi Badan (cm):</label>
+        <input type="number" id="tinggiBadan" placeholder="Masukkan tinggi badan" required>
+
+        <button onclick="hitungBentukTubuh()">Hitung Bentuk Tubuh</button>
+
+        <div class="result" id="hasil">
+            <!-- Hasil perhitungan akan muncul di sini -->
+        </div>
+    </div>
+
+    <script>
+        // Fungsi untuk menghitung Rasio Pinggang-Pinggul (WHR)
+        function hitungWhr(lingkarPinggang, lingkarPinggul) {
+            return lingkarPinggang / lingkarPinggul;
+        }
+
+        // Fungsi untuk menghitung Rasio Pinggang-Tinggi Badan
+        function hitungRasioPinggangTinggi(lingkarPinggang, tinggiBadan) {
+            return lingkarPinggang / tinggiBadan;
+        }
+
+        // Fungsi untuk menentukan bentuk tubuh berdasarkan proporsi
+        function bentukTubuh(lingkarPinggang, lingkarDada, lingkarPinggul) {
+            if (lingkarPinggang < 0.75 * lingkarPinggul && lingkarPinggang < 0.75 * lingkarDada) {
+                return "Bentuk Tubuh Jam Pasir (Hourglass)";
+            } else if (lingkarPinggul > lingkarDada && lingkarPinggang < lingkarPinggul) {
+                return "Bentuk Tubuh Pir (Pear Shape)";
+            } else if (lingkarPinggang > lingkarDada && lingkarPinggang > lingkarPinggul) {
+                return "Bentuk Tubuh Apel (Apple Shape)";
+            } else if (lingkarDada > lingkarPinggang && lingkarPinggang < lingkarPinggul) {
+                return "Bentuk Tubuh Segitiga Terbalik (Inverted Triangle)";
+            } else if (lingkarDada === lingkarPinggang && lingkarPinggang === lingkarPinggul) {
+                return "Bentuk Tubuh Siku (Rectangle/Column)";
+            } else {
+                return "Bentuk Tubuh Tidak Terdefinisi";
+            }
+        }
+
+        // Fungsi utama untuk menghitung dan menentukan bentuk tubuh serta rasio
+        function hitungBentukTubuh() {
+            // Mengambil input dari form
+            const lingkarPinggang = parseFloat(document.getElementById("lingkarPinggang").value);
+            const lingkarDada = parseFloat(document.getElementById("lingkarDada").value);
+            const lingkarPinggul = parseFloat(document.getElementById("lingkarPinggul").value);
+            const tinggiBadan = parseFloat(document.getElementById("tinggiBadan").value);
+
+            // Validasi input
+            if (isNaN(lingkarPinggang) || isNaN(lingkarDada) || isNaN(lingkarPinggul) || isNaN(tinggiBadan)) {
+                alert("Harap masukkan semua data dengan benar!");
+                return;
+            }
+
+            // Menentukan bentuk tubuh
+            const hasilBentuk = bentukTubuh(lingkarPinggang, lingkarDada, lingkarPinggul);
+            
+            // Menghitung rasio-rasio
+            const rasioWhr = hitungWhr(lingkarPinggang, lingkarPinggul);
+            const rasioPinggangTinggi = hitungRasioPinggangTinggi(lingkarPinggang, tinggiBadan);
+
+            // Menampilkan hasil
+            const hasilDiv = document.getElementById("hasil");
+            hasilDiv.innerHTML = `
+                <p><strong>Bentuk tubuh Anda:</strong> ${hasilBentuk}</p>
+                <p><strong>Rasio Pinggang-Pinggul (WHR):</strong> ${rasioWhr.toFixed(2)}</p>
+                <p><strong>Rasio Pinggang-Tinggi Badan:</strong> ${rasioPinggangTinggi.toFixed(2)}</p>
+            `;
+
+            // Memberikan penilaian berdasarkan rasio
+            if (rasioWhr > 0.90) {
+                hasilDiv.innerHTML += "<p>Kemungkinan bentuk tubuh Anda adalah Apel (Apple Shape) berdasarkan rasio WHR.</p>";
+            }
+            if (rasioWhr > 0.85) {
+                hasilDiv.innerHTML += "<p>Kemungkinan bentuk tubuh Anda adalah Apel (Apple Shape) berdasarkan rasio WHR.</p>";
+            }
+            if (rasioPinggangTinggi > 0.5) {
+                hasilDiv.innerHTML += "<p>Anda mungkin memiliki peningkatan risiko kesehatan berdasarkan rasio Pinggang-Tinggi Badan.</p>";
+            }
+        }
+    </script>
+</body>
+</html>
